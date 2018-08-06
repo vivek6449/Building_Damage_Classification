@@ -45,4 +45,4 @@ def building_model_input():
 
     print("Read train and test dataset")
     train = pd.read_csv('/home/vivek/Datasets/Building_Damage_Classification/train.csv')
-test = pd.read_csv('/home/vivek/Datasets/Building_Damage_Classification/test.csv')
+    test = pd.read_csv('/home/vivek/Datasets/Building_Damage_Classification/test.csv')
