@@ -12,17 +12,27 @@ from lightgbm import LGBMClassifier
 
 import gc
 
+# Importing paths
+root_dir = '/home/vivek/Datasets/'
+project_dir = 'Building_Damage_Classification/'
+file_path = os.path.join(root_dir,project_dir)
+
+buil_owner_path = os.path.join(file_path,"Building_Ownership_Use.csv")
+buil_stru_path = os.path.join(file_path, "Building_Structure.csv")
+train_path = os.path.join(file_path, "train.csv")
+test_path = os.path.join(file_path, "test.csv")
+
 def building_model_input():
     print("Reading Building Ownership file.")
-    buil_owner=pd.read_csv('/home/vivek/Datasets/Building_Damage_Classification/Building_Ownership_Use.csv')
+    buil_owner=pd.read_csv(buil_owner_path)
+    
     print("Building Ownership shape: ", buil_owner.shape)
     
     print("transform to dummies")
     buil_owner = pd.concat([buil_owner, pd.get_dummies(buil_owner.legal_ownership_status, prefix='owner')], axis=1).drop('legal_ownership_status', axis=1)
     
     print("Reading building structural file")
-    
-    buil_stru = pd.read_csv('/home/vivek/Datasets/Building_Damage_Classification/Building_Structure.csv')
+    buil_stru = pd.read_csv(buil_stru_path)
 
     print("Building structure shape: ", buil_stru.shape)
     
@@ -44,7 +54,10 @@ def building_model_input():
     gc.collect()
 
     print("Read train and test dataset")
-    train = pd.read_csv('/home/vivek/Datasets/Building_Damage_Classification/train.csv')
-    test = pd.read_csv('/home/vivek/Datasets/Building_Damage_Classification/test.csv')
+    train = pd.read_csv(train_path)
+    test = pd.read_csv(test_path)
+    
+    print("Training data shape: ", train.shape)
+    print("Testing data shape: ", test.shape)
     
     
